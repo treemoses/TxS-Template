@@ -16,6 +16,26 @@
 
 // those are variables selecting main elements on the page
 
+const gifs = [
+  'url(https://i.giphy.com/media/BCXMSiVZeo8xy/giphy.gif)',
+  'url(https://i.giphy.com/media/1d5KHhOA1oTpX7ROOi/giphy.gif)',
+  'url(https://i.giphy.com/media/3o6Zt5nSYQa0czSmnm/giphy.gif)',
+  'url(https://i.giphy.com/media/2tKCVxXIkBgqUZGDJb/giphy.gif)',
+  'url(https://i.giphy.com/media/KtfjlVSFI8EVO/giphy.gif)',
+  'url(https://i.giphy.com/media/xUPGGDgB1ZlUduRov6/giphy.gif)',
+  'url(https://i.giphy.com/media/wAxlCmeX1ri1y/giphy.gif)',
+  'url(https://i.giphy.com/media/MhHcCN6PoTdL2/giphy.gif)',
+  'url(https://i.giphy.com/media/1TJB4TPjtaEJq/giphy.gif)',
+  'url(https://i.giphy.com/media/xe9csf50g4SqY/giphy.gif)',
+];
+
+var userScore =''
+function processButton(rating){
+  userScore = rating
+    //replace backgroundImage with gif reom the list, where list index is userScore -1
+    mainImage.style.backgroundImage = gifs [userScore - 1 ];
+}
+
 var resultBox = document.getElementById('result')
 var titleBox = document.getElementById('title')
 var gifPanel = document.getElementById('gif-panel')
@@ -29,12 +49,14 @@ var yrScore = document.getElementById('yr-score')
 var userRating = document.getElementById('clickRating')
 var compareButton = document.getElementById('result-button')
 // this is how you replace the image from the background
-mainImage.style.backgroundImage = "url(https://i.giphy.com/media/1d5KHhOA1oTpX7ROOi/giphy.gif)"
+// mainImage.style.backgroundImage = "url(https://i.giphy.com/media/1d5KHhOA1oTpX7ROOi/giphy.gif)"
 
 // this is how we hide the resultBox element
 resultBox.hidden = true;
 compareButton.hidden = true;
 
+var slider = document.getElementById('range')
+slider.value
 // this is how you create a function
 function testClickFunction(){
   alert('clickedddd')
@@ -53,6 +75,27 @@ userRating = 7
 userRating = 8
 userRating = 9
 
+// gifs[0]
+// gifs[1]
+// gifs[2]
+// gifs[3]
+// gifs[4]
+// gifs[5]
+// gifs[6]
+// gifs[7]
+// gifs[8]
+// gifs[9]
+
+function clickButton(rating){
+  showButton()
+  userRating = rating
+  mainImage.style.backgroundImage = gifs[rating - 1]
+}
+
+function youImage(){
+  mainImage.style.backgroundImage = gifs[rating - 1]
+}
+/*
 function clicked1() {
   showButton()
   userRating = 1;
@@ -103,6 +146,7 @@ function clicked10() {
   userRating = 10;
   mainImage.style.backgroundImage = "url(https://i.giphy.com/media/xe9csf50g4SqY/giphy.gif)";
 }
+*/
 
 function clickedCompare(){
   resultBox.hidden = false;
