@@ -15,6 +15,7 @@
 */
 
 // those are variables selecting main elements on the page
+var iframeElement = document.querySelector("#song-iframe");
 
 const gifs = [
   'url(https://i.giphy.com/media/BCXMSiVZeo8xy/giphy.gif)',
@@ -54,6 +55,7 @@ var compareButton = document.getElementById('result-button')
 // this is how we hide the resultBox element
 resultBox.hidden = true;
 compareButton.hidden = true;
+nextButton.hidden = true;
 
 var slider = document.getElementById('range')
 slider.value
@@ -90,6 +92,11 @@ function clickButton(rating){
   showButton()
   userRating = rating
   mainImage.style.backgroundImage = gifs[rating - 1]
+}
+
+function nextButton() {
+  showButton()
+
 }
 
 function youImage(){
@@ -148,10 +155,21 @@ function clicked10() {
 }
 */
 
+
 function clickedCompare(){
   resultBox.hidden = false;
   gifPanel.hidden = true;
   youScore.innerHTML = userRating;
+  spotifyScore.innerHTML = spotifyRatings[currentSong]
+}
+
+function clickedNext(){
+  resultBox.hidden = true;
+  gifPanel.hidden = false;
+  compareButton.hidden = true;
+  currentSong = currentSong +1;
+  iframeElement.src = getSpotifySrc(songs[currentSong])
+  setAlbumCover(songs[currentSong] , mainImage)
 }
 
 function clickRating(){
@@ -162,15 +180,53 @@ function showButton(){
   compareButton.hidden = false;
 }
 
+var songs = [
+  "spotify:track:5WEdhokZKavl1ed1ocL7fm", //Overseas Spotify dancability=7.27
+  "spotify:track:1uGooqNfg2PDfVZ0POkzuU", //Let it Go Spotify dancablility=8.62
+  "spotify:track:2rd4FH1cSaWGc0ZiUaMbX9", //Lover Boy Spotify dancability=7.98
+  "spotify:track:3K2zyJhcnMMA6yOdR6hOW7", //ラビリンス Spotify dancibility=6.95
+  "spotify:track:0d28khcov6AiegSCpG5TuT", //Feel Good Inc. Spotify danciblity=8.18
+]
+
+var currentSong = 0;
+
+iframeElement.src = getSpotifySrc(songs[currentSong])
+setAlbumCover(songs[currentSong] , mainImage)
 
 
 
-// Activity today will be
 
-// 1. Create a variable to store the user selected Rating  userRating
-// 2. Create 10 different functions to update the userRating score
-// 3. Add the functions to the correpondent HTML elements, using the onclick="functionName()" attribute
-// 4. Create a function to process the click on Compare button
-// 5. The function should, hide the element voteBox and show resultBox
-// 5.1 Show User score replacing youScore.innerHTML = content
-// 5.2. Change youImage with appropriated Gif image
+
+
+function getSpotifySrc(song) {
+  const songCode = song.split(':')[2];
+  return `https://open.spotify.com/embed/track/${songCode}`;
+}
+
+async function setAlbumCover(song, element){
+  var aa = await getAlbumCover(song);
+  element.style.backgroundImage = `url(${aa})`;
+}
+
+async function getAlbumCover(song) {
+  //return the Image for a specific song ID
+  const songCode = song.split(':')[2];
+  const data = await fetch(`https://cors-anywhere.herokuapp.com/https://embed.spotify.com/oembed?url=http://open.spotify.com/track/${songCode}`)
+    .then(r => r.json());
+  return data.thumbnail_url;
+}
+
+
+var spotifyRatings=[
+7.27,
+8.62,
+7.98,
+6.95,
+8.18,
+]
+
+var userRatings=[
+
+]
+
+userRatings.push()
