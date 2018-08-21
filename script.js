@@ -13,7 +13,59 @@
 10 'https://i.giphy.com/media/xe9csf50g4SqY/giphy.gif',
 
 */
+var title=[
+ "Overseas",
+ "Let it Go",
+ "Lover Boy",
+ "ラビリンス",
+ "Feel Good Inc.",
+]
 
+var artist=[
+  "Bohan Phoenix",
+  "Higher Brothers",
+  "Phum Viphurit",
+  "Mondo Grosso",
+  "Gorillaz",
+]
+
+var songsData=[
+  {
+  songTitle: "Overseas",
+  songURI: "spotify:track:5WEdhokZKavl1ed1ocL7fm",
+  spotifyRating: 7,
+  userRating: null,
+  artistName: "Bohan Pheonix",
+},
+{
+  songTitle: "Let it Go",
+  songURI: "spotify:track:1uGooqNfg2PDfVZ0POkzuU",
+  spotifyRating: 9,
+  userRating: null,
+  artistName: "Higher Brothers",
+},
+{
+  songTitle: "Lover Boy",
+  songURI: "spotify:track:2rd4FH1cSaWGc0ZiUaMbX9",
+  spotifyRating: 8,
+  userRating: null,
+  artistName: "Phum Viphurit",
+},
+{
+  songTitle: "ラビリンス",
+  songURI: "spotify:track:3K2zyJhcnMMA6yOdR6hOW7",
+  spotifyRating: 7,
+  userRating: null,
+  artistName: "Mondo Grosso",
+},
+{
+songTitle: "Feel Good Inc.",
+songURI: "spotify:track:0d28khcov6AiegSCpG5TuT",
+spotifyRating: 8,
+userRating: null,
+artistName: "Gorillaz",
+},
+];
 // those are variables selecting main elements on the page
 var iframeElement = document.querySelector("#song-iframe");
 
@@ -49,6 +101,10 @@ var spotifyScore = document.getElementById('spotify-score')
 var yrScore = document.getElementById('yr-score')
 var userRating = document.getElementById('clickRating')
 var compareButton = document.getElementById('result-button')
+/*
+var songTitle=document.getElementById('song-title')
+var songArtist=document.getElementById('song-artist')
+*/
 // this is how you replace the image from the background
 // mainImage.style.backgroundImage = "url(https://i.giphy.com/media/1d5KHhOA1oTpX7ROOi/giphy.gif)"
 
@@ -99,9 +155,8 @@ function nextButton() {
 
 }
 
-function youImage(){
-  mainImage.style.backgroundImage = gifs[rating - 1]
-}
+// function youImage(){
+// }
 /*
 function clicked1() {
   showButton()
@@ -160,7 +215,10 @@ function clickedCompare(){
   resultBox.hidden = false;
   gifPanel.hidden = true;
   youScore.innerHTML = userRating;
-  spotifyScore.innerHTML = spotifyRatings[currentSong]
+  spotifyScore.innerHTML = songsData[currentSong].spotifyRating
+  youImage.style.backgroundImage = gifs[userRating - 1]
+  spotifyImage.style.backgroundImage = gifs[ songsData[currentSong].spotifyRating - 1]
+
 }
 
 function clickedNext(){
@@ -168,8 +226,8 @@ function clickedNext(){
   gifPanel.hidden = false;
   compareButton.hidden = true;
   currentSong = currentSong +1;
-  iframeElement.src = getSpotifySrc(songs[currentSong])
-  setAlbumCover(songs[currentSong] , mainImage)
+  iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
+  setAlbumCover(songsData[currentSong].songURI , mainImage)
 }
 
 function clickRating(){
@@ -179,7 +237,7 @@ function clickRating(){
 function showButton(){
   compareButton.hidden = false;
 }
-
+/*
 var songs = [
   "spotify:track:5WEdhokZKavl1ed1ocL7fm", //Overseas Spotify dancability=7.27
   "spotify:track:1uGooqNfg2PDfVZ0POkzuU", //Let it Go Spotify dancablility=8.62
@@ -187,11 +245,11 @@ var songs = [
   "spotify:track:3K2zyJhcnMMA6yOdR6hOW7", //ラビリンス Spotify dancibility=6.95
   "spotify:track:0d28khcov6AiegSCpG5TuT", //Feel Good Inc. Spotify danciblity=8.18
 ]
-
+*/
 var currentSong = 0;
 
-iframeElement.src = getSpotifySrc(songs[currentSong])
-setAlbumCover(songs[currentSong] , mainImage)
+iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
+setAlbumCover(songsData[currentSong].songURI , mainImage)
 
 
 
@@ -217,16 +275,12 @@ async function getAlbumCover(song) {
 }
 
 
-var spotifyRatings=[
-7.27,
-8.62,
-7.98,
-6.95,
-8.18,
-]
+/*
+songsData[0].songURI
+songsData[0].songTitle
+songsData[0].artistName
 
-var userRatings=[
-
-]
-
-userRatings.push()
+songsData[INDEX].songURI
+songArtist.innerHTML=songsData[INDEX].artistName
+songTitle.innerHTML=songsData[INDEX].songTitle
+*/
