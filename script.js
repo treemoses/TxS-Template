@@ -221,13 +221,20 @@ function clickedCompare(){
 
 }
 
+
 function clickedNext(){
+  currentSong = currentSong +1;
+  if(currentSong>=songsData.length){
+    Score()
+  }
   resultBox.hidden = true;
   gifPanel.hidden = false;
   compareButton.hidden = true;
-  currentSong = currentSong +1;
   iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
   setAlbumCover(songsData[currentSong].songURI , mainImage)
+  songsData[currentSong].userRating = userRating
+
+
 }
 
 function clickRating(){
@@ -274,8 +281,23 @@ async function getAlbumCover(song) {
   return data.thumbnail_url;
 }
 
+var myResult;
+function Score(){
+  myResult = Math.abs(songsData[0].userRating - songsData[0].spotifyRating) +
+             Math.abs(songsData[1].userRating - songsData[1].spotifyRating) +
+             Math.abs(songsData[2].userRating - songsData[2].spotifyRating) +
+             Math.abs(songsData[3].userRating - songsData[3].spotifyRating) +
+             Math.abs(songsData[4].userRating - songsData[4].spotifyRating);
+  myResult =   myResult /songsData.length;
 
-/*
+  var nesEle = document.getElementById('total-score')
+  nesEle.innerHTML=myResult
+  // if(myResult>0 && myResult<=3){
+  //   show something
+  //   nesEle.InnerHTML="something"
+}
+
+ /*
 songsData[0].songURI
 songsData[0].songTitle
 songsData[0].artistName
