@@ -13,15 +13,15 @@
 10 'https://i.giphy.com/media/xe9csf50g4SqY/giphy.gif',
 
 */
-var title=[
- "Overseas",
- "Let it Go",
- "Lover Boy",
- "ラビリンス",
- "Feel Good Inc.",
+var title = [
+  "Overseas",
+  "Let it Go",
+  "Lover Boy",
+  "ラビリンス",
+  "Feel Good Inc.",
 ]
 
-var artist=[
+var artist = [
   "Bohan Phoenix",
   "Higher Brothers",
   "Phum Viphurit",
@@ -29,42 +29,41 @@ var artist=[
   "Gorillaz",
 ]
 
-var songsData=[
+var songsData = [{
+    songTitle: "Overseas",
+    songURI: "spotify:track:5WEdhokZKavl1ed1ocL7fm",
+    spotifyRating: 7,
+    userRating: null,
+    artistName: "Bohan Pheonix",
+  },
   {
-  songTitle: "Overseas",
-  songURI: "spotify:track:5WEdhokZKavl1ed1ocL7fm",
-  spotifyRating: 7,
-  userRating: null,
-  artistName: "Bohan Pheonix",
-},
-{
-  songTitle: "Let it Go",
-  songURI: "spotify:track:1uGooqNfg2PDfVZ0POkzuU",
-  spotifyRating: 9,
-  userRating: null,
-  artistName: "Higher Brothers",
-},
-{
-  songTitle: "Lover Boy",
-  songURI: "spotify:track:2rd4FH1cSaWGc0ZiUaMbX9",
-  spotifyRating: 8,
-  userRating: null,
-  artistName: "Phum Viphurit",
-},
-{
-  songTitle: "ラビリンス",
-  songURI: "spotify:track:3K2zyJhcnMMA6yOdR6hOW7",
-  spotifyRating: 7,
-  userRating: null,
-  artistName: "Mondo Grosso",
-},
-{
-songTitle: "Feel Good Inc.",
-songURI: "spotify:track:0d28khcov6AiegSCpG5TuT",
-spotifyRating: 8,
-userRating: null,
-artistName: "Gorillaz",
-},
+    songTitle: "Let it Go",
+    songURI: "spotify:track:1uGooqNfg2PDfVZ0POkzuU",
+    spotifyRating: 9,
+    userRating: null,
+    artistName: "Higher Brothers",
+  },
+  {
+    songTitle: "Lover Boy",
+    songURI: "spotify:track:2rd4FH1cSaWGc0ZiUaMbX9",
+    spotifyRating: 8,
+    userRating: null,
+    artistName: "Phum Viphurit",
+  },
+  {
+    songTitle: "ラビリンス",
+    songURI: "spotify:track:3K2zyJhcnMMA6yOdR6hOW7",
+    spotifyRating: 7,
+    userRating: null,
+    artistName: "Mondo Grosso",
+  },
+  {
+    songTitle: "Feel Good Inc.",
+    songURI: "spotify:track:0d28khcov6AiegSCpG5TuT",
+    spotifyRating: 8,
+    userRating: null,
+    artistName: "Gorillaz",
+  },
 ];
 // those are variables selecting main elements on the page
 var iframeElement = document.querySelector("#song-iframe");
@@ -82,11 +81,12 @@ const gifs = [
   'url(https://i.giphy.com/media/xe9csf50g4SqY/giphy.gif)',
 ];
 
-var userScore =''
-function processButton(rating){
+var userScore = ''
+
+function processButton(rating) {
   userScore = rating
-    //replace backgroundImage with gif reom the list, where list index is userScore -1
-    mainImage.style.backgroundImage = gifs [userScore - 1 ];
+  //replace backgroundImage with gif reom the list, where list index is userScore -1
+  mainImage.style.backgroundImage = gifs[userScore - 1];
 }
 
 var resultBox = document.getElementById('result')
@@ -101,6 +101,7 @@ var spotifyScore = document.getElementById('spotify-score')
 var yrScore = document.getElementById('yr-score')
 var userRating = document.getElementById('clickRating')
 var compareButton = document.getElementById('result-button')
+var slidecontainer = document.getElementById('slide-bar')
 /*
 var songTitle=document.getElementById('song-title')
 var songArtist=document.getElementById('song-artist')
@@ -116,22 +117,28 @@ nextButton.hidden = true;
 var slider = document.getElementById('range')
 slider.value
 // this is how you create a function
-function testClickFunction(){
+function testClickFunction() {
   alert('clickedddd')
 }
-function showResultBox(){
+
+function showResultBox() {
 
 }
 var userRating;
-userRating = 1
-userRating = 2
-userRating = 3
-userRating = 4
-userRating = 5
-userRating = 6
-userRating = 7
-userRating = 8
-userRating = 9
+var currentSong = 0;
+
+iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
+setAlbumCover(songsData[currentSong].songURI, mainImage)
+
+
+
+
+var slider = document.getElementById("myRange");
+// var output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+
+
+
 
 // gifs[0]
 // gifs[1]
@@ -144,7 +151,7 @@ userRating = 9
 // gifs[8]
 // gifs[9]
 
-function clickButton(rating){
+function clickButton(rating) {
   showButton()
   userRating = rating
   mainImage.style.backgroundImage = gifs[rating - 1]
@@ -211,38 +218,43 @@ function clicked10() {
 */
 
 
-function clickedCompare(){
+function clickedCompare() {
   resultBox.hidden = false;
   gifPanel.hidden = true;
   youScore.innerHTML = userRating;
   spotifyScore.innerHTML = songsData[currentSong].spotifyRating
   youImage.style.backgroundImage = gifs[userRating - 1]
-  spotifyImage.style.backgroundImage = gifs[ songsData[currentSong].spotifyRating - 1]
+  spotifyImage.style.backgroundImage = gifs[songsData[currentSong].spotifyRating - 1]
 
 }
 
 
-function clickedNext(){
-  currentSong = currentSong +1;
-  if(currentSong>=songsData.length){
+function clickedNext() {
+  currentSong = currentSong + 1;
+  if (currentSong >= songsData.length) {
     Score()
+  } else {
+    resultBox.hidden = true;
+    gifPanel.hidden = false;
+    compareButton.hidden = true;
+    iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
+    setAlbumCover(songsData[currentSong].songURI, mainImage)
+    songsData[currentSong].userRating = userRating
   }
-  resultBox.hidden = true;
-  gifPanel.hidden = false;
-  compareButton.hidden = true;
-  iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
-  setAlbumCover(songsData[currentSong].songURI , mainImage)
-  songsData[currentSong].userRating = userRating
 
 
 }
 
-function clickRating(){
+function clickRating() {
   voteBox.hidden = true;
 }
 
-function showButton(){
+function showButton() {
   compareButton.hidden = false;
+}
+
+function slidecontainer() {
+  slidecontainer.hidden = true;
 }
 /*
 var songs = [
@@ -253,11 +265,6 @@ var songs = [
   "spotify:track:0d28khcov6AiegSCpG5TuT", //Feel Good Inc. Spotify danciblity=8.18
 ]
 */
-var currentSong = 0;
-
-iframeElement.src = getSpotifySrc(songsData[currentSong].songURI)
-setAlbumCover(songsData[currentSong].songURI , mainImage)
-
 
 
 
@@ -268,7 +275,7 @@ function getSpotifySrc(song) {
   return `https://open.spotify.com/embed/track/${songCode}`;
 }
 
-async function setAlbumCover(song, element){
+async function setAlbumCover(song, element) {
   var aa = await getAlbumCover(song);
   element.style.backgroundImage = `url(${aa})`;
 }
@@ -282,22 +289,43 @@ async function getAlbumCover(song) {
 }
 
 var myResult;
-function Score(){
+
+function Score() {
   myResult = Math.abs(songsData[0].userRating - songsData[0].spotifyRating) +
-             Math.abs(songsData[1].userRating - songsData[1].spotifyRating) +
-             Math.abs(songsData[2].userRating - songsData[2].spotifyRating) +
-             Math.abs(songsData[3].userRating - songsData[3].spotifyRating) +
-             Math.abs(songsData[4].userRating - songsData[4].spotifyRating);
-  myResult =   myResult /songsData.length;
+    Math.abs(songsData[1].userRating - songsData[1].spotifyRating) +
+    Math.abs(songsData[2].userRating - songsData[2].spotifyRating) +
+    Math.abs(songsData[3].userRating - songsData[3].spotifyRating) +
+    Math.abs(songsData[4].userRating - songsData[4].spotifyRating);
+  myResult = myResult / songsData.length;
+
+  resultBox.hidden = true;
+  gifPanel.hidden = true;
+  compareButton.hidden = true;
 
   var nesEle = document.getElementById('total-score')
-  nesEle.innerHTML=myResult
+  if( myResult > 0 && myResult <= 2.5 ){
+    nesEle.innerHTML = "You were very close to Spotify's own scores."
+  }
+
+  if( myResult > 2.5 && myResult <= 5 ){
+    nesEle.innerHTML = "You and Spotify have similar musical tastes."
+  }
+
+  if( myResult > 5 && myResult <= 7.5 ){
+    nesEle.innerHTML = "You don't have much in common with Spotify's taste in music."
+  }
+
+  if( myResult > 7.5 && myResult <= 10 ){
+    nesEle.innerHTML = "Ooof. You and Spotify do not enjoy similar musical styles."
+  }
+
   // if(myResult>0 && myResult<=3){
   //   show something
   //   nesEle.InnerHTML="something"
 }
 
- /*
+
+/*
 songsData[0].songURI
 songsData[0].songTitle
 songsData[0].artistName
