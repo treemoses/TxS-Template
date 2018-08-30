@@ -102,6 +102,7 @@ var yrScore = document.getElementById('yr-score')
 var userRating = document.getElementById('clickRating')
 var compareButton = document.getElementById('result-button')
 var slidecontainer = document.getElementById('slide-bar')
+
 /*
 var songTitle=document.getElementById('song-title')
 var songArtist=document.getElementById('song-artist')
@@ -114,12 +115,13 @@ resultBox.hidden = true;
 compareButton.hidden = true;
 nextButton.hidden = true;
 
-var slider = document.getElementById('range')
+/*var slider = document.getElementById('range')
 slider.value
 // this is how you create a function
 function testClickFunction() {
   alert('clickedddd')
 }
+*/
 
 function showResultBox() {
 
@@ -253,9 +255,10 @@ function showButton() {
   compareButton.hidden = false;
 }
 
-function slidecontainer() {
+/*function slidecontainer() {
   slidecontainer.hidden = true;
 }
+*/
 /*
 var songs = [
   "spotify:track:5WEdhokZKavl1ed1ocL7fm", //Overseas Spotify dancability=7.27
@@ -301,6 +304,7 @@ function Score() {
   resultBox.hidden = true;
   gifPanel.hidden = true;
   compareButton.hidden = true;
+  titleBox.hidden = true;
 
   var nesEle = document.getElementById('total-score')
   if( myResult > 0 && myResult <= 2.5 ){

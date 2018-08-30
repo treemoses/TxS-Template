@@ -5,7 +5,7 @@
 .myborder {
   border-style: solid;
   border-width: 13px;
-  border-color: purple;
+  border-color: black;
 }
 .slidecontainer {
   width: 100%;
@@ -118,4 +118,11 @@
 }
 .cursor {
   cursor: pointer;
+  font-size: 50px
+}
+.cursor:hover {
+  color: orange
+}
+.emoji {
+   height: 200%;
 }
